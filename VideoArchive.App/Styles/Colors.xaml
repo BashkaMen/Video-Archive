@@ -1,0 +1,29 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VideoArchive.App.Styles">
+
+
+    <SolidColorBrush x:Key="DarkBaseBrush" Color="#158150" />
+    <Color x:Key="DarkBaseColor">#158150</Color>
+
+    <SolidColorBrush x:Key="MediumBaseBrush" Color="#21a86d" />
+    <Color x:Key="MediumBaseColor">#21a86d</Color>
+
+    <SolidColorBrush x:Key="LightBaseBrush" Color="#FF2CB679" />
+    <Color x:Key="LightBaseColor">#FF2CB679</Color>
+
+    <SolidColorBrush x:Key="UltraLightBaseBrush" Color="#FF3BC588" />
+    <Color x:Key="UltraLightBaseColor">#FF3BC588</Color>
+
+
+    <SolidColorBrush x:Key="DarkBrush" Color="#302e31" />
+    <Color x:Key="DarkColor">#302e31</Color>
+
+    <SolidColorBrush x:Key="MediumBrush" Color="#38393b" />
+    <Color x:Key="MediumColor">#38393b</Color>
+
+    <SolidColorBrush x:Key="LightBrush" Color="#424242" />
+    <Color x:Key="LightColor">#424242</Color>
+
+</ResourceDictionary>

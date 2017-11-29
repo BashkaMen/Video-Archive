@@ -1,0 +1,102 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VideoArchive.App.Styles">
+
+
+    <Style x:Key="ScrollBarLineButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Height="18">
+                        <Polygon Fill="{StaticResource MediumBaseBrush}" Points="3,15 15,15 9,3" />
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScrollBarLineButtonBottomStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Canvas Height="18">
+                        <Polygon Fill="{StaticResource MediumBaseBrush}" Points="3,3 9,15 15,3" />
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border BorderBrush="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Margin" Value="1,0,1,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border
+                        Margin="2"
+                        Background="{StaticResource MediumBaseBrush}"
+                        CornerRadius="5" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition MaxHeight="18" />
+                <RowDefinition Height="*" />
+                <RowDefinition MaxHeight="18" />
+            </Grid.RowDefinitions>
+
+            <RepeatButton
+                Grid.Row="0"
+                Height="18"
+                Command="ScrollBar.LineUpCommand"
+                Style="{StaticResource ScrollBarLineButtonStyle}" />
+            <Track
+                Name="PART_Track"
+                Grid.Row="1"
+                IsDirectionReversed="True">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageUpCommand" Style="{StaticResource ScrollBarPageButtonStyle}" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ScrollBarThumbStyle}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton Command="ScrollBar.PageDownCommand" Style="{StaticResource ScrollBarPageButtonStyle}" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+            <RepeatButton
+                Grid.Row="3"
+                Height="18"
+                Command="ScrollBar.LineDownCommand"
+                Style="{StaticResource ScrollBarLineButtonBottomStyle}" />
+        </Grid>
+    </ControlTemplate>
+
+    <Style TargetType="{x:Type ScrollBar}">
+        <Setter Property="Template" Value="{StaticResource VerticalScrollBar}" />
+    </Style>
+
+
+
+</ResourceDictionary>

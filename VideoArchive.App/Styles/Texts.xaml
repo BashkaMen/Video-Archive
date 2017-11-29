@@ -1,0 +1,74 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VideoArchive.App.Styles">
+
+
+    <Style x:Key="BaseText" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
+        <Setter Property="FontSize" Value="{StaticResource Regular}" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Foreground" Value="White" />
+    </Style>
+
+    <Style x:Key="BaseTextBox" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
+        <Setter Property="FontSize" Value="{StaticResource Regular}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource LightBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="CaretBrush" Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid Margin="5">
+
+
+
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
+
+                            <!--<TextBox
+                                x:Name="text"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                BorderBrush="{x:Null}"
+                                BorderThickness="0"
+                                CaretBrush="{TemplateBinding CaretBrush}"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
+                                TextAlignment="{TemplateBinding TextAlignment}" />-->
+
+                            <TextBlock
+                                x:Name="hint"
+                                VerticalAlignment="Center"
+                                Background="Transparent"
+                                FontSize="{TemplateBinding FontSize}"
+                                Foreground="Gray"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Tag}"
+                                TextAlignment="{TemplateBinding TextAlignment}"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="hint" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

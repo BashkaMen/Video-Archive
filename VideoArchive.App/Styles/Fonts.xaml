@@ -1,0 +1,14 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:VideoArchive.App.Styles"
+    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+
+    <FontFamily x:Key="BaseFont">Consolas</FontFamily>
+    <system:Double x:Key="Smal">15</system:Double>
+    <system:Double x:Key="Regular">17</system:Double>
+    <system:Double x:Key="Big">22</system:Double>
+    <system:Double x:Key="H1">25</system:Double>
+
+</ResourceDictionary>

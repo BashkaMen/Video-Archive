@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NReco.VideoInfo</name>
+    </assembly>
+    <members>
+        <member name="T:NReco.VideoInfo.FFProbeException">
+            <summary>
+            The exception that is thrown when FFProbe process retruns non-zero error exit code
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbeException.ErrorCode">
+            <summary>
+            Get FFMpeg process error code
+            </summary>
+        </member>
+        <member name="T:NReco.VideoInfo.FFProbe">
+            <summary>
+            Provides information about media streams, video or audio files (wrapper for FFProbe command line tool)
+            </summary>
+        </member>
+        <member name="M:NReco.VideoInfo.FFProbe.#ctor">
+            <summary>
+            Create new instance of HtmlToPdfConverter
+            </summary>
+        </member>
+        <member name="M:NReco.VideoInfo.FFProbe.GetMediaInfo(System.String)">
+            <summary>
+            Returns information about local media file or online stream (URL).
+            </summary>
+            <param name="inputFile">local file path or URL</param>
+            <returns>Structured information about media</returns>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.ToolPath">
+            <summary>
+            Gets or sets path where FFProbe.exe is extracted
+            </summary>
+            <remarks>
+            By default this property initialized with folder with application assemblies.
+            For ASP.NET applications it is recommended to use "~/App_Code/".
+            </remarks>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.FFProbeExeName">
+            <summary>
+            Get or set FFProbe tool executive file name ('ffprobe.exe' by default)
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.CustomArgs">
+            <summary>
+            Get or set custom WkHtmlToImage command line arguments
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.ProcessPriority">
+            <summary>
+            Gets or sets FFProbe process priority (Normal by default)
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.ExecutionTimeout">
+            <summary>
+            Gets or sets maximum execution time for running FFProbe process (null is by default = no timeout)
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.IncludeFormat">
+            <summary>
+            Include information about file format.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.FFProbe.IncludeStreams">
+            <summary>
+            Include information about media streams.
+            </summary>
+        </member>
+        <member name="T:NReco.VideoInfo.MediaInfo">
+            <summary>
+            Represents information about media file or stream.
+            </summary>
+        </member>
+        <member name="M:NReco.VideoInfo.MediaInfo.GetAttrValue(System.String)">
+            <summary>
+            Returns attribute value from FFProbe XML result.
+            </summary>
+            <param name="xpath">XPath selector</param>
+            <returns>attribute value or null</returns>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.FormatName">
+            <summary>
+            Media container format identifier.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.FormatLongName">
+            <summary>
+            Human-readable container format name.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.FormatTags">
+            <summary>
+            List of media container tags.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.Streams">
+            <summary>
+            List of media streams.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.Duration">
+            <summary>
+            Total duration of the media.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.Result">
+            <summary>
+            FFProble XML result.
+            </summary>
+        </member>
+        <member name="T:NReco.VideoInfo.MediaInfo.StreamInfo">
+            <summary>
+            Represents information about stream.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.Index">
+            <summary>
+            Stream index
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.CodecName">
+            <summary>
+            Codec name identifier
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.CodecLongName">
+            <summary>
+            Human-readable codec name.
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.CodecType">
+            <summary>
+            Codec type (video, audio).
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.PixelFormat">
+            <summary>
+            Video stream pixel format (if applicable).
+            </summary>
+            <remarks>Null is returned if pixel format is not available.</remarks>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.Width">
+            <summary>
+            Video frame width (if applicable).
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.Height">
+            <summary>
+            Video frame height (if applicable)
+            </summary>
+        </member>
+        <member name="P:NReco.VideoInfo.MediaInfo.StreamInfo.FrameRate">
+            <summary>
+            Video frame rate per second (if applicable).
+            </summary>
+        </member>
+    </members>
+</doc>

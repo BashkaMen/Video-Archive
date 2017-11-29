@@ -1,0 +1,12 @@
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\VideoArchive.ViewModel.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\VideoArchive.ViewModel.pdb
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\DevExpress.Mvvm.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\DevExpress.Mvvm.UI.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\VideoArchive.Model.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\NReco.VideoInfo.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\NReco.VideoInfo.xml
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\obj\Debug\VideoArchive.ViewModel.csprojResolveAssemblyReference.cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\obj\Debug\VideoArchive.ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\obj\Debug\VideoArchive.ViewModel.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\obj\Debug\VideoArchive.ViewModel.pdb
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.ViewModel\bin\Debug\VideoArchive.Model.pdb

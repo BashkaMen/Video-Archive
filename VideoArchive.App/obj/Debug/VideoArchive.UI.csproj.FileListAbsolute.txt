@@ -1,0 +1,17 @@
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\bin\Debug\VideoArchive.App.exe.config
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\bin\Debug\VideoArchive.App.exe
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\bin\Debug\VideoArchive.App.pdb
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\bin\Debug\VideoArchive.Model.dll
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\bin\Debug\VideoArchive.Model.pdb
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.UI.csprojResolveAssemblyReference.cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\MainWindow.g.cs
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\App.g.cs
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App_MarkupCompile.cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App_MarkupCompile.lref
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\MainWindow.baml
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App.g.resources
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App.Properties.Resources.resources
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.UI.csproj.GenerateResource.Cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.UI.csproj.CoreCompileInputs.cache
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App.exe
+C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\VideoArchive.App.pdb
