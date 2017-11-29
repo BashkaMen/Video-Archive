@@ -47,6 +47,17 @@ namespace VideoArchive.App.ViewModel
             {
                 return new DelegateCommand<Window>((w) =>
                 {
+                    foreach (var key in VideoInfo.KeyWords)
+                    {
+                        if (DataBase.GetInstance().KeyWords.FirstOrDefault(s=> key.Value == s) == null)
+                        {
+                            DataBase.GetInstance().KeyWords.Add(key.Value);
+                        }
+                    }
+
+
+
+
                     w?.Close();
                 });
             }
