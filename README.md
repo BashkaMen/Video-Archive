@@ -1,6 +1,6 @@
 # Video-Archive
 
-Video: https://youtu.be/TMvgDZEqJc4
+YouTube обзор: https://youtu.be/TMvgDZEqJc4
 
 Приложение реализовано на фреймворке WPF с использование шаблона проектирования MVVM
 Приложение нужно для содержания видеобиблиотеки локально, и для синхронизации данных о видео с YouTube
