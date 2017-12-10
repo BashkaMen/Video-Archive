@@ -17,13 +17,13 @@
     <Color x:Key="UltraLightBaseColor">#FF3BC588</Color>
 
 
-    <SolidColorBrush x:Key="DarkBrush" Color="#302e31" />
-    <Color x:Key="DarkColor">#302e31</Color>
+    <SolidColorBrush x:Key="DarkBrush" Color="#FFD6D6D6" />
+    <Color x:Key="DarkColor">#FFD6D6D6</Color>
 
-    <SolidColorBrush x:Key="MediumBrush" Color="#38393b" />
-    <Color x:Key="MediumColor">#38393b</Color>
+    <SolidColorBrush x:Key="MediumBrush" Color="#FFF1F1F1" />
+    <Color x:Key="MediumColor">#FFF1F1F1</Color>
 
-    <SolidColorBrush x:Key="LightBrush" Color="#424242" />
-    <Color x:Key="LightColor">#424242</Color>
+    <SolidColorBrush x:Key="LightBrush" Color="white" />
+    <Color x:Key="LightColor">white</Color>
 
 </ResourceDictionary>

@@ -2,14 +2,14 @@
     x:Class="VideoArchive.App.Views.EditVideoWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="clr-namespace:VideoArchive.App.Model"
+    xmlns:toolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
     xmlns:viewmodel="clr-namespace:VideoArchive.App.ViewModel"
     Title="EditVideoWindow"
     Width="500"
-    Height="900"
+    Height="700"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -83,6 +83,8 @@
                                 <TextBox
                                     Margin="10"
                                     VerticalAlignment="Center"
+                                    AcceptsReturn="True"
+                                    AcceptsTab="True"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding VideoInfo.Descrition, UpdateSourceTrigger=PropertyChanged}"
                                     TextWrapping="Wrap" />
@@ -121,12 +123,21 @@
                                                         <ColumnDefinition Width="1*" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <TextBox
+                                                    <toolkit:AutoCompleteBox
                                                         Margin="3"
-                                                        behaviors:AutoCompleteBehavior.AutoCompleteItemsSource="{Binding Source={StaticResource DataBase}, Path=KeyWords}"
-                                                        Style="{StaticResource BaseTextBox}"
+                                                        BorderThickness="0"
+                                                        FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
+                                                        ItemsSource="{Binding Source={StaticResource DataBase}, Path=KeyWords}"
                                                         Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                                                        TextAlignment="Center" />
+                                                        TextBlock.TextAlignment="Center">
+                                                        <toolkit:AutoCompleteBox.TextBoxStyle>
+                                                            <Style BasedOn="{StaticResource BaseTextBox}" TargetType="TextBox">
+                                                                <Setter Property="FocusManager.FocusedElement" Value="{Binding RelativeSource={RelativeSource Self}}" />
+                                                            </Style>
+                                                        </toolkit:AutoCompleteBox.TextBoxStyle>
+                                                    </toolkit:AutoCompleteBox>
+
+                                                    <!--    -->
 
                                                     <Button
                                                         Grid.Column="1"
@@ -242,85 +253,61 @@
                                     Margin="10"
                                     VerticalAlignment="Center"
                                     AcceptsReturn="True"
+                                    AcceptsTab="True"
                                     Style="{StaticResource BaseTextBox}"
                                     Text="{Binding VideoInfo.Comment, UpdateSourceTrigger=PropertyChanged}"
                                     TextWrapping="Wrap" />
                             </UniformGrid>
 
 
+                            <StackPanel>
+                                <ItemsControl ItemsSource="{Binding VideoInfo.Images}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Margin="5">
+                                                <Image
+                                                    Width="100"
+                                                    Height="100"
+                                                    Source="{Binding FallbackValue='http://placehold.it/100x100/302e31'}" />
 
-                            <UniformGrid MaxWidth="{Binding ElementName=media, Path=MaxWidth}" Columns="4">
-                                <UniformGrid.Resources>
-                                    <Style TargetType="Image">
-                                        <Setter Property="Margin" Value="5" />
-                                    </Style>
-                                </UniformGrid.Resources>
+                                                <Border
+                                                    Width="{Binding RelativeSource={RelativeSource Self}, Path=ActualHeight}"
+                                                    HorizontalAlignment="Right"
+                                                    VerticalAlignment="Top"
+                                                    Background="#FFFF2020"
+                                                    CornerRadius="3">
+                                                    <Border.InputBindings>
+                                                        <MouseBinding
+                                                            Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.RemoveImage}"
+                                                            CommandParameter="{Binding}"
+                                                            Gesture="LeftClick" />
+                                                    </Border.InputBindings>
 
-                                <Image Source="{Binding VideoInfo.Images[0], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="0"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[1], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="1"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[2], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="2"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[3], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="3"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[4], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="4"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[5], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="5"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[6], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="6"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                                <Image Source="{Binding VideoInfo.Images[7], FallbackValue='http://placehold.it/150x150/302e31'}">
-                                    <Image.InputBindings>
-                                        <MouseBinding
-                                            Command="{Binding ImageClick}"
-                                            CommandParameter="7"
-                                            Gesture="LeftDoubleClick" />
-                                    </Image.InputBindings>
-                                </Image>
-                            </UniformGrid>
+                                                    <TextBlock
+                                                        Margin="1"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        Foreground="White"
+                                                        Style="{StaticResource BaseText}"
+                                                        Text="🗙" />
+                                                </Border>
+
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Button
+                                    Margin="4"
+                                    Command="{Binding AddImage}"
+                                    Content="Добавить картинку"
+                                    Style="{StaticResource BaseButton}" />
+                            </StackPanel>
+
                         </StackPanel>
                     </Border>
 

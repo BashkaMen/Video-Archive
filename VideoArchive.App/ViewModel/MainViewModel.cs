@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using VideoArchive.App.Model;
 using VideoArchive.App.ViewModel;
 using VideoArchive.App.Views;
@@ -23,8 +24,10 @@ namespace VideoArchive.ViewModel
         public ObservableCollection<Video> Videos { get; set; }
         public ICollectionView VideosView { get; set; }
         public Page MainContent { get; set; }
+        public Video SelectedVideo { get; set; }
 
-        
+
+
         private string _SearchText { get; set; }
         public string SearchText
         {
@@ -36,7 +39,14 @@ namespace VideoArchive.ViewModel
                 {
                     if (obj is Video video)
                     {
-                        return video.Name.ToLower().Contains(SearchText.ToLower());
+                        if (SearchText.StartsWith("@"))
+                        {
+                            return video.KeyWords.FirstOrDefault(s=> s.Value.ToLower().Contains(SearchText.Remove(0, 1).ToLower())) != null;
+                        }
+                        else
+                        {
+                            return video.Name.ToLower().Contains(SearchText.ToLower());
+                        }
                     }
 
                     return false;
@@ -45,8 +55,6 @@ namespace VideoArchive.ViewModel
 
             }
         }
-
-
         public MainViewModel()
         {
             OverlayService.GetInstance().Show = (str) =>
@@ -64,7 +72,7 @@ namespace VideoArchive.ViewModel
             VideosView = CollectionViewSource.GetDefaultView(Videos);
         }
 
-        public DelegateCommand Sort
+        public ICommand Sort
         {
             get
             {
@@ -84,20 +92,20 @@ namespace VideoArchive.ViewModel
             }
         }
 
-        public DelegateCommand<Video> DeleteVideo
+        public ICommand DeleteVideo
         {
             get
             {
                 return new DelegateCommand<Video>((video) =>
                 {
                     Videos.Remove(video);
-
+                    SelectedVideo = Videos.FirstOrDefault();
 
                 }, (video)=> video != null);
             }
         }
 
-        public DelegateCommand AddItem
+        public ICommand AddItem
         {
             get
             {
@@ -128,11 +136,11 @@ namespace VideoArchive.ViewModel
                                     Descrition = info?.Items?.FirstOrDefault()?.Snippet?.Description,
                                     PublishData = info?.Items?.FirstOrDefault()?.Snippet?.PublishedAt ?? new DateTime(),
                                     Url = "https://www.youtube.com/watch?v=" + info?.Items?.FirstOrDefault()?.Id?.VideoId,
-                                    Images = new ObservableCollection<string>() { "", "", "", "", "", "", "", "" }
                                 });
 
                                 Task.Delay(500).Wait();
                             }
+                            SelectedVideo = Videos.FirstOrDefault(s => s.Path == opd.FileNames.FirstOrDefault());
 
                             OverlayService.GetInstance().Close();
                         });
@@ -142,7 +150,7 @@ namespace VideoArchive.ViewModel
             }
         }
 
-        public DelegateCommand<string> GoToUrl
+        public ICommand GoToUrl
         {
             get
             {
@@ -162,7 +170,7 @@ namespace VideoArchive.ViewModel
             }
         }
 
-        public DelegateCommand<Video> EditVideo
+        public ICommand EditVideo
         {
             get
             {
@@ -178,6 +186,41 @@ namespace VideoArchive.ViewModel
                     File.WriteAllText("VideosData.json", JsonConvert.SerializeObject(Videos));
 
                 }, (video) => video != null);
+            }
+        }
+
+        public ICommand OpenImage
+        {
+            get
+            {
+                return new DelegateCommand<string>((image) =>
+                {
+                    if (image != null)
+                    {
+                        var iv = new ImageViewer()
+                        {
+                            DataContext = new ImageViewerViewModel
+                            {
+                                Image = image
+                            }
+                        };
+                        iv.ShowDialog();
+                    }
+                });
+            }
+        }
+
+        public ICommand KeyWordClick
+        {
+            get
+            {
+                return new DelegateCommand<KeyWordItem>((word) =>
+                {
+                    if (word != null)
+                    {
+                        SearchText = "@" + word.Value;
+                    }
+                });
             }
         }
 

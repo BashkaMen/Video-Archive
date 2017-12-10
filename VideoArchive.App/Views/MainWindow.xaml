@@ -12,7 +12,7 @@
     Name="window"
     Title="ВидеоАрхив"
     Width="900"
-    Height="900"
+    Height="700"
     MinWidth="800"
     MinHeight="560"
     ResizeMode="CanResize"
@@ -32,7 +32,7 @@
         <viewmodel:MainViewModel />
     </Window.DataContext>
 
-    <Grid Background="#f2f3f6">
+    <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="250" />
             <ColumnDefinition Width="*" />
@@ -46,14 +46,16 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Image Source="http://placehold.it/250x150/302e31" Stretch="Fill" />
+            <Image Source="http://placehold.it/250x150/EDEDED" Stretch="Fill" />
 
 
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
+
 
                 <StackPanel>
                     <DockPanel Margin="10">
@@ -74,23 +76,24 @@
                         Command="{Binding Sort}"
                         Content="Названия"
                         Style="{StaticResource BaseButton}" />
-
-                    <ListBox
-                        Name="VideoList"
-                        HorizontalContentAlignment="Stretch"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        ItemsSource="{Binding VideosView}"
-                        ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Setter Property="Template" Value="{StaticResource VideoListItems}" />
-                            </Style>
-                        </ListBox.ItemContainerStyle>
-                    </ListBox>
                 </StackPanel>
 
-                <Grid Grid.Row="1" Background="{StaticResource DarkBrush}">
+                <ListBox
+                    Grid.Row="1"
+                    HorizontalContentAlignment="Stretch"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    ItemsSource="{Binding VideosView}"
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                    SelectedItem="{Binding SelectedVideo}">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Template" Value="{StaticResource VideoListItems}" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+
+                <Grid Grid.Row="2" Background="{StaticResource DarkBrush}">
                     <StackPanel
                         Margin="5"
                         HorizontalAlignment="Center"
@@ -105,6 +108,7 @@
                             Text="{Binding VideosView.Count, StringFormat=Найдено: {0}}" />
                     </StackPanel>
                 </Grid>
+
             </Grid>
 
         </Grid>
@@ -129,7 +133,7 @@
                     <Button
                         Margin="-2,0,0,0"
                         Command="{Binding EditVideo}"
-                        CommandParameter="{Binding ElementName=VideoList, Path=SelectedItem}"
+                        CommandParameter="{Binding SelectedVideo}"
                         Style="{StaticResource BaseButton}">
                         <ContentControl Height="50" Content="{StaticResource PanIcon}" />
                     </Button>
@@ -137,7 +141,7 @@
                     <Button
                         Margin="-2,0,0,0"
                         Command="{Binding DeleteVideo}"
-                        CommandParameter="{Binding ElementName=VideoList, Path=SelectedItem}"
+                        CommandParameter="{Binding SelectedVideo}"
                         Style="{StaticResource BaseButton}">
                         <ContentControl Height="50" Content="{StaticResource TrashIcon}" />
                     </Button>
@@ -146,28 +150,29 @@
 
             </Grid>
 
-            <Grid Grid.Row="1" Background="{StaticResource LightBrush}">
+            <Grid
+                Grid.Row="1"
+                Background="{StaticResource LightBrush}"
+                DataContext="{Binding SelectedVideo}">
+
                 <ScrollViewer>
-                    <StackPanel
-                        Name="root"
-                        Margin="10"
-                        DataContext="{Binding ElementName=VideoList, Path=SelectedItem}">
-                        <StackPanel.Style>
-                            <Style TargetType="StackPanel">
-                                <Style.Triggers>
-                                    <Trigger Property="DataContext" Value="{x:Null}">
-                                        <Setter Property="Visibility" Value="Hidden" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </StackPanel.Style>
+                    <ScrollViewer.Style>
+                        <Style TargetType="ScrollViewer">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource Self}, Path=DataContext}" Value="{x:Null}">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ScrollViewer.Style>
 
 
+                    <StackPanel Name="root" Margin="10">
                         <TextBlock
                             Margin="10"
                             FontSize="{StaticResource H1}"
                             Style="{StaticResource BaseText}"
-                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Name}"
+                            Text="{Binding Name}"
                             TextAlignment="Center"
                             TextWrapping="Wrap" />
 
@@ -200,7 +205,7 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Channel}"
+                                            Text="{Binding Channel}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
@@ -211,12 +216,17 @@
                                             Style="{StaticResource BaseText}"
                                             Text="Описание: " />
 
-                                        <TextBlock
-                                            Margin="10"
-                                            VerticalAlignment="Center"
-                                            Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Descrition}"
-                                            TextWrapping="Wrap" />
+                                        <ScrollViewer
+                                            MaxHeight="150"
+                                            HorizontalScrollBarVisibility="Hidden"
+                                            VerticalScrollBarVisibility="Auto">
+                                            <TextBlock
+                                                Margin="10"
+                                                VerticalAlignment="Center"
+                                                Style="{StaticResource BaseText}"
+                                                Text="{Binding Descrition}"
+                                                TextWrapping="Wrap" />
+                                        </ScrollViewer>
                                     </UniformGrid>
 
                                     <UniformGrid Background="{StaticResource DarkBrush}" Columns="2">
@@ -230,7 +240,7 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Tematic}"
+                                            Text="{Binding Tematic}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
@@ -243,7 +253,7 @@
 
 
 
-                                        <ItemsControl ItemsSource="{Binding ElementName=VideoList, Path=SelectedItem.KeyWords}">
+                                        <ItemsControl ItemsSource="{Binding KeyWords}">
                                             <ItemsControl.ItemsPanel>
                                                 <ItemsPanelTemplate>
                                                     <WrapPanel />
@@ -251,15 +261,27 @@
                                             </ItemsControl.ItemsPanel>
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock
-                                                        Margin="5"
-                                                        VerticalAlignment="Center"
-                                                        Cursor="Hand"
-                                                        Foreground="{StaticResource MediumBaseBrush}"
-                                                        Style="{StaticResource BaseText}"
-                                                        Text="{Binding Value}"
-                                                        TextDecorations="Underline"
-                                                        TextWrapping="Wrap" />
+                                                    <Border
+                                                        Margin="3"
+                                                        Background="{StaticResource MediumBaseBrush}"
+                                                        CornerRadius="3"
+                                                        Cursor="Hand">
+                                                        <TextBlock
+                                                            Margin="5"
+                                                            VerticalAlignment="Center"
+                                                            Foreground="White"
+                                                            Style="{StaticResource BaseText}"
+                                                            Text="{Binding Value}"
+                                                            TextDecorations="Underline"
+                                                            TextWrapping="Wrap" />
+
+                                                        <Border.InputBindings>
+                                                            <MouseBinding
+                                                                Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.KeyWordClick}"
+                                                                CommandParameter="{Binding}"
+                                                                Gesture="LeftClick" />
+                                                        </Border.InputBindings>
+                                                    </Border>
                                                 </DataTemplate>
                                             </ItemsControl.ItemTemplate>
                                         </ItemsControl>
@@ -277,7 +299,7 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
+                                            Text="{Binding Duration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
@@ -292,7 +314,7 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Size, StringFormat={}{0:n2} МБ}"
+                                            Text="{Binding Size, StringFormat={}{0:n2} МБ}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
@@ -307,7 +329,7 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.PublishData, StringFormat={}{0:dd.MM.yyyy}}"
+                                            Text="{Binding PublishData, StringFormat={}{0:dd.MM.yyyy}}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
@@ -324,13 +346,13 @@
                                             Cursor="Hand"
                                             Foreground="{StaticResource MediumBaseBrush}"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Url}"
+                                            Text="{Binding Url}"
                                             TextDecorations="Underline"
                                             TextWrapping="Wrap">
                                             <TextBlock.InputBindings>
                                                 <MouseBinding
                                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.GoToUrl}"
-                                                    CommandParameter="{Binding ElementName=VideoList, Path=SelectedItem.Url}"
+                                                    CommandParameter="{Binding Url}"
                                                     Gesture="LeftClick" />
                                             </TextBlock.InputBindings>
                                         </TextBlock>
@@ -350,13 +372,13 @@
                                             Cursor="Hand"
                                             Foreground="{StaticResource MediumBaseBrush}"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Path}"
+                                            Text="{Binding Path}"
                                             TextDecorations="Underline"
                                             TextWrapping="Wrap">
                                             <TextBlock.InputBindings>
                                                 <MouseBinding
                                                     Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.GoToUrl}"
-                                                    CommandParameter="{Binding ElementName=VideoList, Path=SelectedItem.Path}"
+                                                    CommandParameter="{Binding Path}"
                                                     Gesture="LeftClick" />
                                             </TextBlock.InputBindings>
                                         </TextBlock>
@@ -373,53 +395,66 @@
                                             Margin="10"
                                             VerticalAlignment="Center"
                                             Style="{StaticResource BaseText}"
-                                            Text="{Binding ElementName=VideoList, Path=SelectedItem.Comment}"
+                                            Text="{Binding Comment}"
                                             TextWrapping="Wrap" />
                                     </UniformGrid>
 
-
-
-
                                     <Grid Margin="0,20,0,0">
-                                        <StackPanel>
-                                            <controls:RepeatMediaElement
-                                                x:Name="media"
-                                                MinWidth="500"
-                                                MaxWidth="1000"
-                                                Margin="5"
-                                                HorizontalAlignment="Stretch"
-                                                ScrubbingEnabled="True"
-                                                Source="{Binding Path}"
-                                                Volume="{Binding ElementName=mediaVolume, Path=Value}" />
+                                        <WrapPanel HorizontalAlignment="Center" Orientation="Vertical">
+                                            <StackPanel HorizontalAlignment="Center">
+                                                <controls:RepeatMediaElement
+                                                    x:Name="media"
+                                                    MaxWidth="400"
+                                                    Margin="5"
+                                                    HorizontalAlignment="Center"
+                                                    ScrubbingEnabled="True"
+                                                    Source="{Binding Path}"
+                                                    Volume="{Binding ElementName=mediaVolume, Path=Value}" />
 
-                                            <Slider
-                                                Name="mediaVolume"
-                                                MaxWidth="{Binding ElementName=media, Path=MaxWidth}"
-                                                Maximum="1"
-                                                Minimum="0"
-                                                TickFrequency="0.1" />
-                                        </StackPanel>
+                                                <Slider
+                                                    Name="mediaVolume"
+                                                    MaxWidth="{Binding ElementName=media, Path=MaxWidth}"
+                                                    Maximum="1"
+                                                    Minimum="0"
+                                                    TickFrequency="0.1" />
+                                            </StackPanel>
+
+                                            <ItemsControl ItemsSource="{Binding Images}">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <WrapPanel />
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Image
+                                                                Width="100"
+                                                                Height="100"
+                                                                Margin="5"
+                                                                Source="{Binding FallbackValue='http://placehold.it/100x100/EDEDED'}">
+                                                                <Image.InputBindings>
+                                                                    <MouseBinding
+                                                                        Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.OpenImage}"
+                                                                        CommandParameter="{Binding}"
+                                                                        Gesture="LeftClick" />
+                                                                </Image.InputBindings>
+                                                            </Image>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+
+
+                                        </WrapPanel>
+
+
 
 
                                     </Grid>
 
 
-                                    <UniformGrid MaxWidth="{Binding ElementName=media, Path=MaxWidth}" Columns="4">
-                                        <UniformGrid.Resources>
-                                            <Style TargetType="Image">
-                                                <Setter Property="Margin" Value="5" />
-                                            </Style>
-                                        </UniformGrid.Resources>
 
-                                        <Image Source="{Binding Images[0], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[1], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[2], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[3], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[4], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[5], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[6], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                        <Image Source="{Binding Images[7], FallbackValue='http://placehold.it/150x150/302e31'}" />
-                                    </UniformGrid>
                                 </StackPanel>
                             </Border>
 

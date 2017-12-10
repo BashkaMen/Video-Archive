@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using VideoArchive.App.Model;
 using VideoArchive.Model;
 
@@ -54,26 +56,40 @@ namespace VideoArchive.App.ViewModel
                             DataBase.GetInstance().KeyWords.Add(key.Value);
                         }
                     }
-
-
-
-
                     w?.Close();
                 });
             }
         }
 
-        public DelegateCommand<int> ImageClick
+        public ICommand AddImage
         {
             get
             {
-                return new DelegateCommand<int>((index) =>
+                return new DelegateCommand(() =>
                 {
                     var opd = new OpenFileDialog();
+                    opd.Multiselect = true;
                     opd.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
                     if (opd.ShowDialog() == true)
                     {
-                        VideoInfo.Images[index] = opd.FileName;
+                        foreach (var item in opd.FileNames)
+                        {
+                            VideoInfo.Images.Add(item);
+                        }
+                    }
+                });
+            }
+        }
+
+        public ICommand RemoveImage
+        {
+            get
+            {
+                return new DelegateCommand<string>((image) =>
+                {
+                    if (image != null)
+                    {
+                        VideoInfo.Images.Remove(image);
                     }
                 });
             }

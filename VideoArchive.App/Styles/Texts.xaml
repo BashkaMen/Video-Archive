@@ -8,7 +8,7 @@
         <Setter Property="FontFamily" Value="{StaticResource BaseFont}" />
         <Setter Property="FontSize" Value="{StaticResource Regular}" />
         <Setter Property="FontWeight" Value="Light" />
-        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
     </Style>
 
     <Style x:Key="BaseTextBox" TargetType="TextBox">
@@ -16,8 +16,8 @@
         <Setter Property="FontSize" Value="{StaticResource Regular}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{StaticResource LightBrush}" />
-        <Setter Property="Foreground" Value="White" />
-        <Setter Property="CaretBrush" Value="White" />
+        <Setter Property="Foreground" Value="Black" />
+        <Setter Property="CaretBrush" Value="Black" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
@@ -31,18 +31,6 @@
 
 
                             <ScrollViewer x:Name="PART_ContentHost" Margin="0" />
-
-                            <!--<TextBox
-                                x:Name="text"
-                                VerticalAlignment="Center"
-                                Background="Transparent"
-                                BorderBrush="{x:Null}"
-                                BorderThickness="0"
-                                CaretBrush="{TemplateBinding CaretBrush}"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="{TemplateBinding Foreground}"
-                                Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text}"
-                                TextAlignment="{TemplateBinding TextAlignment}" />-->
 
                             <TextBlock
                                 x:Name="hint"

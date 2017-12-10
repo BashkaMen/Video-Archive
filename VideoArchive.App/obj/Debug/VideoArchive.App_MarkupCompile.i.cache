@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\
+C:\Users\sbm15\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\obj\Debug\
 VideoArchive.App
 none
 false
 DEBUG;TRACE
-C:\Users\megab\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\App.xaml
-12942606994
+C:\Users\sbm15\Dropbox\С# проекты\Projects\VideoArchive\VideoArchive.App\App.xaml
+121560071940
 
-23878421922
-74-714351373
-Controls\EditableTextBox.xaml;Controls\MainContent.xaml;Views\EditVideoWindow.xaml;Views\MainWindow.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\ContentControls.xaml;Styles\Defaults.xaml;Styles\Fonts.xaml;Styles\Icons.xaml;Styles\Texts.xaml;Styles\UserControl.xaml;
+24317405118
+75-2144943030
+Controls\MainContent.xaml;Views\EditVideoWindow.xaml;Views\ImageViewer.xaml;Views\MainWindow.xaml;Styles\Buttons.xaml;Styles\Colors.xaml;Styles\ContentControls.xaml;Styles\Defaults.xaml;Styles\Fonts.xaml;Styles\Icons.xaml;Styles\Texts.xaml;Styles\UserControl.xaml;
 
 True
 
