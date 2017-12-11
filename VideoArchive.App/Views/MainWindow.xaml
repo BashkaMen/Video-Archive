@@ -217,8 +217,8 @@
                                             Text="Описание: " />
 
                                         <ScrollViewer
-                                            MaxHeight="150"
-                                            HorizontalScrollBarVisibility="Hidden"
+                                            MaxHeight="100"
+                                            HorizontalScrollBarVisibility="Disabled"
                                             VerticalScrollBarVisibility="Auto">
                                             <TextBlock
                                                 Margin="10"

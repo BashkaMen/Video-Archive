@@ -70,6 +70,7 @@ namespace VideoArchive.ViewModel
             };
             BindingOperations.EnableCollectionSynchronization(Videos, new object());
             VideosView = CollectionViewSource.GetDefaultView(Videos);
+
         }
 
         public ICommand Sort
@@ -135,7 +136,7 @@ namespace VideoArchive.ViewModel
                                     Channel = info?.Items?.FirstOrDefault()?.Snippet?.ChannelTitle,
                                     Descrition = info?.Items?.FirstOrDefault()?.Snippet?.Description,
                                     PublishData = info?.Items?.FirstOrDefault()?.Snippet?.PublishedAt ?? new DateTime(),
-                                    Url = "https://www.youtube.com/watch?v=" + info?.Items?.FirstOrDefault()?.Id?.VideoId,
+                                    Url = "https://youtu.be/" + info?.Items?.FirstOrDefault()?.Id?.VideoId,
                                 });
 
                                 Task.Delay(500).Wait();

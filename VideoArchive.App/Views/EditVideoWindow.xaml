@@ -28,7 +28,13 @@
     <Grid Background="{StaticResource LightBrush}">
         <ScrollViewer>
             <StackPanel Name="root" Margin="010">
-
+                <Button
+                    MinWidth="200"
+                    Margin="5"
+                    HorizontalAlignment="Center"
+                    Command="{Binding UpdateVideoInfo}"
+                    Content="Обновить информацию"
+                    Style="{StaticResource BaseButton}" />
 
                 <TextBlock
                     Margin="10"
@@ -126,9 +132,10 @@
                                                     <toolkit:AutoCompleteBox
                                                         Margin="3"
                                                         BorderThickness="0"
+                                                        FilterMode="Contains"
                                                         FocusManager.FocusedElement="{Binding RelativeSource={RelativeSource Self}}"
                                                         ItemsSource="{Binding Source={StaticResource DataBase}, Path=KeyWords}"
-                                                        Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
+                                                        Text="{Binding Value, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                                         TextBlock.TextAlignment="Center">
                                                         <toolkit:AutoCompleteBox.TextBoxStyle>
                                                             <Style BasedOn="{StaticResource BaseTextBox}" TargetType="TextBox">
@@ -136,8 +143,6 @@
                                                             </Style>
                                                         </toolkit:AutoCompleteBox.TextBoxStyle>
                                                     </toolkit:AutoCompleteBox>
-
-                                                    <!--    -->
 
                                                     <Button
                                                         Grid.Column="1"
