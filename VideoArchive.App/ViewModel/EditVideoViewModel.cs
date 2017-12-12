@@ -101,19 +101,14 @@ namespace VideoArchive.App.ViewModel
             {
                 return new DelegateCommand(() =>
                 {
-                    var info = new YouTubeAPI().SearchVideo(VideoInfo.Name);
+                    var info = new YouTubeAPI().getVideoInfo(VideoInfo.Name);
 
                     if (info != null)
                     {
-                        var video = info?.Items?.FirstOrDefault();
-
-                        if (video != null)
-                        {
-                            VideoInfo.Channel = video?.Snippet?.ChannelTitle;
-                            VideoInfo.Descrition = video?.Snippet?.Description;
-                            VideoInfo.PublishData = video?.Snippet?.PublishedAt ?? new DateTime();
-                            VideoInfo.Url = "https://youtu.be/" + video?.Id?.VideoId ?? "";
-                        }
+                        VideoInfo.Channel = info.Channel;
+                        VideoInfo.Descrition = info.Description;
+                        VideoInfo.PublishData = info.PublicDate;
+                        VideoInfo.Url = info.Url;
                     }
 
                 });

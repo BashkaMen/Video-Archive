@@ -39,13 +39,17 @@ namespace VideoArchive.ViewModel
                 {
                     if (obj is Video video)
                     {
-                        if (SearchText.StartsWith("@"))
+                        switch (SearchText.FirstOrDefault())
                         {
-                            return video.KeyWords.FirstOrDefault(s=> s.Value.ToLower().Contains(SearchText.Remove(0, 1).ToLower())) != null;
-                        }
-                        else
-                        {
-                            return video.Name.ToLower().Contains(SearchText.ToLower());
+                            case '@': return video.KeyWords.FirstOrDefault(s => s.Value.ToLower().Contains(SearchText.Remove(0, 1).ToLower())) != null;
+                            case '#': return video.Tematic?.ToLower().Contains(SearchText.Remove(0, 1).ToLower()) == true;
+                            case '!': return video.Channel?.ToLower().Contains(SearchText.Remove(0, 1).ToLower()) == true;
+                            case '$':
+                                if (DateTime.TryParse(SearchText.Remove(0, 1), out DateTime date))
+                                    return video.PublishData.Date == date.Date;
+                                return false;
+
+                            default: return video.Name.ToLower().Contains(SearchText.ToLower());
                         }
                     }
 
@@ -92,7 +96,6 @@ namespace VideoArchive.ViewModel
                 });
             }
         }
-
         public ICommand DeleteVideo
         {
             get
@@ -105,7 +108,6 @@ namespace VideoArchive.ViewModel
                 }, (video)=> video != null);
             }
         }
-
         public ICommand AddItem
         {
             get
@@ -120,12 +122,15 @@ namespace VideoArchive.ViewModel
                         {
                             OverlayService.GetInstance().Show("Загрузка информации о видео...");
 
+                            IVideoHostApi api = new YouTubeAPI();
+
                             for (int i = 0; i < opd.FileNames.Length; i++)
                             {
                                 OverlayService.GetInstance().Show($"Загрузка информации о видео...{Environment.NewLine}{i}/{opd.FileNames.Length}");
                                 var file = opd.FileNames[i];
 
-                                var info = new YouTubeAPI().SearchVideo(Path.GetFileNameWithoutExtension(file));
+
+                                var info = api.getVideoInfo(Path.GetFileNameWithoutExtension(file));
 
                                 Videos.Add(new Video
                                 {
@@ -133,10 +138,10 @@ namespace VideoArchive.ViewModel
                                     Name = Path.GetFileNameWithoutExtension(file),
                                     Size = (new FileInfo(file).Length / 1024.0) / 1024.0,
                                     Duration = new FFProbe().GetMediaInfo(file).Duration,
-                                    Channel = info?.Items?.FirstOrDefault()?.Snippet?.ChannelTitle,
-                                    Descrition = info?.Items?.FirstOrDefault()?.Snippet?.Description,
-                                    PublishData = info?.Items?.FirstOrDefault()?.Snippet?.PublishedAt ?? new DateTime(),
-                                    Url = "https://youtu.be/" + info?.Items?.FirstOrDefault()?.Id?.VideoId,
+                                    Channel = info?.Channel,
+                                    Descrition = info?.Description,
+                                    PublishData = info?.PublicDate ?? new DateTime(),
+                                    Url = info?.Url,
                                 });
 
                                 Task.Delay(500).Wait();
@@ -150,7 +155,19 @@ namespace VideoArchive.ViewModel
                 });
             }
         }
-
+        public ICommand TematicClick
+        {
+            get
+            {
+                return new DelegateCommand<string>((tematic) =>
+                {
+                    if (tematic != null)
+                    {
+                        SearchText = "#" + tematic;
+                    }
+                });
+            }
+        }
         public ICommand GoToUrl
         {
             get
@@ -170,7 +187,6 @@ namespace VideoArchive.ViewModel
                 });
             }
         }
-
         public ICommand EditVideo
         {
             get
@@ -189,7 +205,6 @@ namespace VideoArchive.ViewModel
                 }, (video) => video != null);
             }
         }
-
         public ICommand OpenImage
         {
             get
@@ -210,7 +225,6 @@ namespace VideoArchive.ViewModel
                 });
             }
         }
-
         public ICommand KeyWordClick
         {
             get
@@ -224,6 +238,29 @@ namespace VideoArchive.ViewModel
                 });
             }
         }
+        public ICommand ChannelClick
+        {
+            get
+            {
+                return new DelegateCommand<string>((channel) =>
+                {
+                    if (channel != null)
+                    {
+                        SearchText = "!" + channel;
+                    }
+                });
+            }
+        }
+        public ICommand DataClick
+        {
+            get
+            {
+                return new DelegateCommand<DateTime>((date) =>
+                {
+                    SearchText = "$" + date.Date.ToShortDateString();
 
+                });
+            }
+        }
     }
 }

@@ -204,9 +204,17 @@
                                         <TextBlock
                                             Margin="10"
                                             VerticalAlignment="Center"
+                                            Cursor="Hand"
                                             Style="{StaticResource BaseText}"
                                             Text="{Binding Channel}"
-                                            TextWrapping="Wrap" />
+                                            TextWrapping="Wrap">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding
+                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.ChannelClick}"
+                                                    CommandParameter="{Binding Channel}"
+                                                    Gesture="LeftClick" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
                                     </UniformGrid>
 
                                     <UniformGrid Background="{StaticResource MediumBrush}" Columns="2">
@@ -239,9 +247,17 @@
                                         <TextBlock
                                             Margin="10"
                                             VerticalAlignment="Center"
+                                            Cursor="Hand"
                                             Style="{StaticResource BaseText}"
                                             Text="{Binding Tematic}"
-                                            TextWrapping="Wrap" />
+                                            TextWrapping="Wrap">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding
+                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.TematicClick}"
+                                                    CommandParameter="{Binding Tematic}"
+                                                    Gesture="LeftClick" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
                                     </UniformGrid>
 
                                     <UniformGrid Background="{StaticResource MediumBrush}" Columns="2">
@@ -328,9 +344,17 @@
                                         <TextBlock
                                             Margin="10"
                                             VerticalAlignment="Center"
+                                            Cursor="Hand"
                                             Style="{StaticResource BaseText}"
                                             Text="{Binding PublishData, StringFormat={}{0:dd.MM.yyyy}}"
-                                            TextWrapping="Wrap" />
+                                            TextWrapping="Wrap">
+                                            <TextBlock.InputBindings>
+                                                <MouseBinding
+                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=DataContext.DataClick}"
+                                                    CommandParameter="{Binding PublishData}"
+                                                    Gesture="LeftClick" />
+                                            </TextBlock.InputBindings>
+                                        </TextBlock>
                                     </UniformGrid>
 
                                     <UniformGrid Background="{StaticResource MediumBrush}" Columns="2">
