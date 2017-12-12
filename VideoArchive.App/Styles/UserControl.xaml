@@ -13,6 +13,7 @@
                 <TextBlock
                     Name="txt"
                     Margin="5"
+                    VerticalAlignment="Center"
                     FontWeight="Bold"
                     Foreground="Gray"
                     Style="{StaticResource BaseText}"
@@ -23,6 +24,7 @@
 
             <Polygon
                 Name="triangle"
+                Margin="2"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Fill="{Binding ElementName=brd, Path=Background}"

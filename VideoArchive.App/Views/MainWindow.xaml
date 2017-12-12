@@ -79,6 +79,7 @@
                 </StackPanel>
 
                 <ListBox
+                    SelectionMode="Extended"
                     Grid.Row="1"
                     HorizontalContentAlignment="Stretch"
                     Background="Transparent"
